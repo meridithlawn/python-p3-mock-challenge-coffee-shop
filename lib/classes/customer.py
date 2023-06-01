@@ -14,9 +14,12 @@ class Customer:
             raise Exception("Names must be a string between 1 and 15 characters")
         
     def orders(self):
-        pass
+        return [order for order in Order.all if order.customer == self]
     
     def coffees(self):
-        from classes.coffee import Coffee
-        pass
+        return list({order.coffee for order in Order.all if order.customer == self}) 
+    
+    def create_order(self, coffee, price):
+        Order(self, coffee, price)
+
 from classes.order import Order
